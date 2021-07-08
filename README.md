@@ -2,7 +2,7 @@
 
 ## Resultados dos testes
 
-O script foi executado 10 vezes em um computador com processador ARM 8-core (Appple M1) e os resultados podem ser observados abaixo:
+O script foi executado 10 vezes em um computador com processador ARM 8-core (Apple M1) e os resultados podem ser observados abaixo:
 
 | Nº de Threads |    1    |    2    |    4     |    8     |
 | ------------- | ------- | ------- | -------- | -------- |
