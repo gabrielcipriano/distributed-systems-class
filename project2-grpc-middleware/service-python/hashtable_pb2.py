@@ -15,11 +15,11 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='hashtable.proto',
-  package='',
-  syntax='proto2',
-  serialized_options=None,
+  package='tutorial',
+  syntax='proto3',
+  serialized_options=b'Zagithub.com/gabrielcipriano/distributed-systems-class/tree/main/project2-grpc-middleware/client-go',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0fhashtable.proto\"(\n\nputRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05\"\x19\n\x0bputResponse\x12\n\n\x02ok\x18\x01 \x01(\x08\"\x19\n\ngetRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"\x1c\n\x0bgetResponse\x12\r\n\x05value\x18\x01 \x01(\x05'
+  serialized_pb=b'\n\x0fhashtable.proto\x12\x08tutorial\"D\n\nputRequest\x12\x10\n\x03key\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x12\n\x05value\x18\x02 \x01(\x05H\x01\x88\x01\x01\x42\x06\n\x04_keyB\x08\n\x06_value\"%\n\x0bputResponse\x12\x0f\n\x02ok\x18\x01 \x01(\x08H\x00\x88\x01\x01\x42\x05\n\x03_ok\"&\n\ngetRequest\x12\x10\n\x03key\x18\x01 \x01(\tH\x00\x88\x01\x01\x42\x06\n\x04_key\"+\n\x0bgetResponse\x12\x12\n\x05value\x18\x01 \x01(\x05H\x00\x88\x01\x01\x42\x08\n\x06_value2w\n\tHashtable\x12\x34\n\x03put\x12\x14.tutorial.putRequest\x1a\x15.tutorial.putResponse\"\x00\x12\x34\n\x03get\x12\x14.tutorial.getRequest\x1a\x15.tutorial.getResponse\"\x00\x42\x63Zagithub.com/gabrielcipriano/distributed-systems-class/tree/main/project2-grpc-middleware/client-gob\x06proto3'
 )
 
 
@@ -27,21 +27,21 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _PUTREQUEST = _descriptor.Descriptor(
   name='putRequest',
-  full_name='putRequest',
+  full_name='tutorial.putRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='putRequest.key', index=0,
+      name='key', full_name='tutorial.putRequest.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='putRequest.value', index=1,
+      name='value', full_name='tutorial.putRequest.value', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -55,25 +55,35 @@ _PUTREQUEST = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_key', full_name='tutorial.putRequest._key',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_value', full_name='tutorial.putRequest._value',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
-  serialized_start=19,
-  serialized_end=59,
+  serialized_start=29,
+  serialized_end=97,
 )
 
 
 _PUTRESPONSE = _descriptor.Descriptor(
   name='putResponse',
-  full_name='putResponse',
+  full_name='tutorial.putResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ok', full_name='putResponse.ok', index=0,
+      name='ok', full_name='tutorial.putResponse.ok', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -87,25 +97,30 @@ _PUTRESPONSE = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_ok', full_name='tutorial.putResponse._ok',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
-  serialized_start=61,
-  serialized_end=86,
+  serialized_start=99,
+  serialized_end=136,
 )
 
 
 _GETREQUEST = _descriptor.Descriptor(
   name='getRequest',
-  full_name='getRequest',
+  full_name='tutorial.getRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='getRequest.key', index=0,
+      name='key', full_name='tutorial.getRequest.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -119,25 +134,30 @@ _GETREQUEST = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_key', full_name='tutorial.getRequest._key',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
-  serialized_start=88,
-  serialized_end=113,
+  serialized_start=138,
+  serialized_end=176,
 )
 
 
 _GETRESPONSE = _descriptor.Descriptor(
   name='getResponse',
-  full_name='getResponse',
+  full_name='tutorial.getResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='getResponse.value', index=0,
+      name='value', full_name='tutorial.getResponse.value', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -151,14 +171,34 @@ _GETRESPONSE = _descriptor.Descriptor(
   ],
   serialized_options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_value', full_name='tutorial.getResponse._value',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
-  serialized_start=115,
-  serialized_end=143,
+  serialized_start=178,
+  serialized_end=221,
 )
 
+_PUTREQUEST.oneofs_by_name['_key'].fields.append(
+  _PUTREQUEST.fields_by_name['key'])
+_PUTREQUEST.fields_by_name['key'].containing_oneof = _PUTREQUEST.oneofs_by_name['_key']
+_PUTREQUEST.oneofs_by_name['_value'].fields.append(
+  _PUTREQUEST.fields_by_name['value'])
+_PUTREQUEST.fields_by_name['value'].containing_oneof = _PUTREQUEST.oneofs_by_name['_value']
+_PUTRESPONSE.oneofs_by_name['_ok'].fields.append(
+  _PUTRESPONSE.fields_by_name['ok'])
+_PUTRESPONSE.fields_by_name['ok'].containing_oneof = _PUTRESPONSE.oneofs_by_name['_ok']
+_GETREQUEST.oneofs_by_name['_key'].fields.append(
+  _GETREQUEST.fields_by_name['key'])
+_GETREQUEST.fields_by_name['key'].containing_oneof = _GETREQUEST.oneofs_by_name['_key']
+_GETRESPONSE.oneofs_by_name['_value'].fields.append(
+  _GETRESPONSE.fields_by_name['value'])
+_GETRESPONSE.fields_by_name['value'].containing_oneof = _GETRESPONSE.oneofs_by_name['_value']
 DESCRIPTOR.message_types_by_name['putRequest'] = _PUTREQUEST
 DESCRIPTOR.message_types_by_name['putResponse'] = _PUTRESPONSE
 DESCRIPTOR.message_types_by_name['getRequest'] = _GETREQUEST
@@ -168,30 +208,67 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 putRequest = _reflection.GeneratedProtocolMessageType('putRequest', (_message.Message,), {
   'DESCRIPTOR' : _PUTREQUEST,
   '__module__' : 'hashtable_pb2'
-  # @@protoc_insertion_point(class_scope:putRequest)
+  # @@protoc_insertion_point(class_scope:tutorial.putRequest)
   })
 _sym_db.RegisterMessage(putRequest)
 
 putResponse = _reflection.GeneratedProtocolMessageType('putResponse', (_message.Message,), {
   'DESCRIPTOR' : _PUTRESPONSE,
   '__module__' : 'hashtable_pb2'
-  # @@protoc_insertion_point(class_scope:putResponse)
+  # @@protoc_insertion_point(class_scope:tutorial.putResponse)
   })
 _sym_db.RegisterMessage(putResponse)
 
 getRequest = _reflection.GeneratedProtocolMessageType('getRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETREQUEST,
   '__module__' : 'hashtable_pb2'
-  # @@protoc_insertion_point(class_scope:getRequest)
+  # @@protoc_insertion_point(class_scope:tutorial.getRequest)
   })
 _sym_db.RegisterMessage(getRequest)
 
 getResponse = _reflection.GeneratedProtocolMessageType('getResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETRESPONSE,
   '__module__' : 'hashtable_pb2'
-  # @@protoc_insertion_point(class_scope:getResponse)
+  # @@protoc_insertion_point(class_scope:tutorial.getResponse)
   })
 _sym_db.RegisterMessage(getResponse)
 
+
+DESCRIPTOR._options = None
+
+_HASHTABLE = _descriptor.ServiceDescriptor(
+  name='Hashtable',
+  full_name='tutorial.Hashtable',
+  file=DESCRIPTOR,
+  index=0,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=223,
+  serialized_end=342,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='put',
+    full_name='tutorial.Hashtable.put',
+    index=0,
+    containing_service=None,
+    input_type=_PUTREQUEST,
+    output_type=_PUTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='get',
+    full_name='tutorial.Hashtable.get',
+    index=1,
+    containing_service=None,
+    input_type=_GETREQUEST,
+    output_type=_GETRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_HASHTABLE)
+
+DESCRIPTOR.services_by_name['Hashtable'] = _HASHTABLE
 
 # @@protoc_insertion_point(module_scope)

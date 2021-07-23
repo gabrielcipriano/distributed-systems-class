@@ -3,6 +3,11 @@ package tutorial;
 
 option go_package = 'github.com/gabrielcipriano/distributed-systems-class/tree/main/project2-grpc-middleware/client-go';
 
+service Hashtable {
+  rpc put (putRequest) returns (putResponse) {}
+  rpc get (getRequest) returns (getResponse) {}
+}
+
 message putRequest {
   optional string key = 1;
   optional int32 value = 2;
