@@ -6,7 +6,8 @@ url = "http://localhost:5000/api"
 headers = { "Content-Type": "application/json" }
 
 def put(key, value):
-    payload = { 'jsonrpc': '2.0', 'id': '1',
+    payload = { 'jsonrpc': '2.0', 
+                'id': '1',
                 'method': 'put()',
                 'params': { 'key': key, 'value': value } }
     data = json.dumps(payload)

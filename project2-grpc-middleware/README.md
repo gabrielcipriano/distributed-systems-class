@@ -1,4 +1,4 @@
-# Middleware RPC
+# Middleware gRPC
 
 ## Python
 
