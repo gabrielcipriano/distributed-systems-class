@@ -1,3 +1,8 @@
+syntax = "proto3";
+package tutorial;
+
+option go_package = 'github.com/gabrielcipriano/distributed-systems-class/tree/main/project2-grpc-middleware/client-go';
+
 message putRequest {
   optional string key = 1;
   optional int32 value = 2;
