@@ -5,11 +5,11 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 	"time"
 
+	pb "main/client_go"
+
 	"google.golang.org/grpc"
-	pb "./client_go"
 )
 
 const (
@@ -27,16 +27,14 @@ func main() {
 	c := pb.NewHashtableClient(conn)
 
 	// Contact the server and print out its response.
-	name := defaultName
-	if len(os.Args) > 1 {
-		name = os.Args[1]
-	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	r, err := c.Put(ctx, &pb.Put{key: "5", value: 5})
-	log.Printf("Put: %t", r.Ok)
+	var key string = "jesus"
+	var value int32 = 666
+	r, _ := c.Put(ctx, &pb.PutRequest{Key: &key, Value: &value})
+	log.Printf("Put: %t", r.GetOk())
 
-	r, err := c.Get(ctx, &pb.Put{key: "5"})
-	log.Printf("Get: %d", r.Value)
+	rr, _ := c.Get(ctx, &pb.GetRequest{Key: &key})
+	log.Printf("Get: %d", rr.GetValue())
 }

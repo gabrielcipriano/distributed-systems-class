@@ -44,17 +44,17 @@ if __name__ == '__main__':
 
 
 
-class Greeter(helloworld_pb2_grpc.GreeterServicer):
+# class Greeter(helloworld_pb2_grpc.GreeterServicer):
 
-    async def SayHello(
-            self, request: helloworld_pb2.HelloRequest,
-            context: grpc.aio.ServicerContext) -> helloworld_pb2.HelloReply:
-        return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
+#     async def SayHello(
+#             self, request: helloworld_pb2.HelloRequest,
+#             context: grpc.aio.ServicerContext) -> helloworld_pb2.HelloReply:
+#         return helloworld_pb2.HelloReply(message='Hello, %s!' % request.name)
 
-getrequest = hashtable_pb2.getRequest()
-putrequest = hashtable_pb2.putRequest()
+# getrequest = hashtable_pb2.getRequest()
+# putrequest = hashtable_pb2.putRequest()
 
-getrequest.key = "1"
-getrequest.value = 1
+# getrequest.key = "1"
+# getrequest.value = 1
 
 
