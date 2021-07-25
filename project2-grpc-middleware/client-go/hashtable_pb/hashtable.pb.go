@@ -4,7 +4,7 @@
 // 	protoc        v3.17.3
 // source: hashtable.proto
 
-package client_go
+package hashtable_pb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

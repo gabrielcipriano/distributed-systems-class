@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	pb "main/client_go"
+	pb "main/hashtable_pb"
 
 	"google.golang.org/grpc"
 )
@@ -31,7 +31,7 @@ func main() {
 	defer cancel()
 
 	var key string = "jesus"
-	var value int32 = 666
+	var value int32 = 6667
 	r, _ := c.Put(ctx, &pb.PutRequest{Key: &key, Value: &value})
 	log.Printf("Put: %t", r.GetOk())
 
