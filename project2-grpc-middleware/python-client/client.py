@@ -1,23 +1,37 @@
-import logging
 import asyncio
 import grpc
 
 import hashtable_pb2
 import hashtable_pb2_grpc
 
+from multiprocessing import Pool
 
-async def run() -> None:
+async def runGrpc(key: str, value: int) -> None:
     async with grpc.aio.insecure_channel('localhost:50051') as channel:
         stub = hashtable_pb2_grpc.HashtableStub(channel)
-        response = await stub.put(hashtable_pb2.putRequest(key='2', value=2))
-    print(f"Put client received: {response.ok}")
+        await stub.put(hashtable_pb2.putRequest(key=key, value=value))
+        response = await stub.get(hashtable_pb2.getRequest(key=key))
+        if(response.value != value):
+            print("ERRO: Valor do servidor não era o esperado", response.value, value)
 
-    async with grpc.aio.insecure_channel('localhost:50051') as channel:
-        stub = hashtable_pb2_grpc.HashtableStub(channel)
-        response = await stub.get(hashtable_pb2.getRequest(key='2'))
-    print(f"Get client received: {response.value}")
-
+def runGrpc_sync(par) -> None:
+    key, value = par
+    asyncio.run(runGrpc(key, value))
+    return value
 
 if __name__ == '__main__':
-    logging.basicConfig()
-    asyncio.run(run())
+    m = 10000
+    processos = 8
+    keys = []
+    values = []
+
+    # gera os valores
+    for i in range(m):
+        keys.append(str(i))
+        values.append(i)
+
+    # executa a operacao
+    with Pool(processos) as p:
+        p.map(runGrpc_sync, zip(keys, values))
+
+    # print("Acabou.")

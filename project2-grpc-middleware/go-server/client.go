@@ -7,6 +7,8 @@ import (
 	"log"
 	"time"
 
+	"math/rand"
+
 	pb "main/hashtable_pb"
 
 	"google.golang.org/grpc"
@@ -17,7 +19,27 @@ const (
 	defaultName = "hashtable"
 )
 
-func main() {
+func run(keys []string, values []int) {
+	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+
+	c := pb.NewHashtableClient(conn)
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+}
+
+func main2() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	n := 1000
+
+	var keys [n]string
+
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {

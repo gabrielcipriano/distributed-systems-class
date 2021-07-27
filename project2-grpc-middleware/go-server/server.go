@@ -1,4 +1,3 @@
-// Package main implements a server for Greeter service.
 package main
 
 import (
@@ -8,6 +7,8 @@ import (
 
 	pb "main/hashtable_pb"
 
+	ht "main/safe_hashtable"
+
 	"google.golang.org/grpc"
 )
 
@@ -16,7 +17,7 @@ const (
 )
 
 // Hashtable
-var hashtable map[string]int32
+var hashtable ht.SafeHashtable
 
 // server is used to implement HashtableServer
 type server struct {
@@ -25,21 +26,23 @@ type server struct {
 
 // Put implements HashtableServer
 func (s *server) Put(ctx context.Context, in *pb.PutRequest) (*pb.PutResponse, error) {
-	log.Printf("Received: %v: %v", in.GetKey(), in.GetValue())
-	hashtable[in.GetKey()] = in.GetValue()
+	// log.Printf("Received: %v: %v", in.GetKey(), in.GetValue())
+	hashtable.Put(in.GetKey(), in.GetValue())
 	ok := true
 	return &pb.PutResponse{Ok: &ok}, nil
 }
 
 // Put implements HashtableServer
 func (s *server) Get(ctx context.Context, in *pb.GetRequest) (*pb.GetResponse, error) {
-	log.Printf("Received: %v", in.GetKey())
-	value := hashtable[in.GetKey()]
+	// log.Printf("Received: %v", in.GetKey())
+
+	value := hashtable.Get(in.GetKey())
 	return &pb.GetResponse{Value: &value}, nil
 }
 
 func main() {
-	hashtable = make(map[string]int32)
+	hashtable = ht.SafeHashtable{}
+	hashtable.Create()
 
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
