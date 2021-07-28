@@ -15,6 +15,17 @@ async def runGrpc(key: str, value: int) -> None:
         if(response.value != value):
             print("ERRO: Valor do servidor não era o esperado", response.value, value)
 
+def runGrpcSync(par) -> None:
+    key, value = par
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = hashtable_pb2_grpc.HashtableStub(channel)
+        stub.put(hashtable_pb2.putRequest(key=key, value=value))
+        response = stub.get(hashtable_pb2.getRequest(key=key))
+        if(response.value != value):
+            print("ERRO: Valor do servidor não era o esperado", response.value, value)
+
+
+
 def runGrpc_sync(par) -> None:
     key, value = par
     asyncio.run(runGrpc(key, value))
@@ -37,7 +48,8 @@ if __name__ == '__main__':
     p = Pool(processes=processos)
     for i in range(5):
         start = time()
-        result = p.map(runGrpc_sync, zip(keys, values))
+        # result = p.map(runGrpc_sync, zip(keys, values))
+        result = p.map(runGrpcSync, zip(keys, values))
         tempo.append(time() - start)
         print(f"Tempo({i}): ", tempo[i])
     p.close()
