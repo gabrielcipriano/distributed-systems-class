@@ -32,6 +32,8 @@ if __name__ == '__main__':
 
     # executa a operacao
     with Pool(processos) as p:
-        p.map(runGrpc_sync, zip(keys, values))
+        p.map_async(runGrpc_sync, zip(keys, values))
+        p.close()
+        p.join()
 
     # print("Acabou.")
