@@ -1,4 +1,4 @@
-# Distributed Systems Class projects
+# Parallel Sorting
 
 ## Resultados dos testes
 
