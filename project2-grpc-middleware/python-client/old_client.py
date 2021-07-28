@@ -1,7 +1,6 @@
 import asyncio
 import grpc
-from time import time
-from statistics import mean, median, pstdev
+
 import hashtable_pb2
 import hashtable_pb2_grpc
 
@@ -21,11 +20,8 @@ def runGrpc_sync(par) -> None:
     return value
 
 if __name__ == '__main__':
-
-    tempo = []
-
     m = 10000
-    processos = 1
+    processos = 8
     keys = []
     values = []
 
@@ -34,19 +30,8 @@ if __name__ == '__main__':
         keys.append(str(i))
         values.append(i)
 
-    p = Pool(processes=processos)
-    for i in range(5):
-        start = time()
-        result = p.map(runGrpc_sync, zip(keys, values))
-        tempo.append(time() - start)
-        print(f"Tempo({i}): ", tempo[i])
-    p.close()
-    p.join()
-
-    print(f"\n{processos} processos:")
-    print(f"Média: {mean(tempo)}")
-    print(f"Mediana: {median(tempo)}")
-    print(f"Desvio Padrão: {pstdev(tempo)}")
-
+    # executa a operacao
+    with Pool(processos) as p:
+        p.map(runGrpc_sync, zip(keys, values))
 
     # print("Acabou.")
