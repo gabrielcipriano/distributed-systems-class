@@ -13,3 +13,15 @@ O script foi executado 10 vezes em um computador com processador ARM 8-core (App
 <p align="left">
   <img src="results.png" width="500" title="Resultados">
 </p>
+
+### Erros encontrados
+
+Ao tentar executar o script pela primeira vez, nos deparamos com o seguinte erro no servidor (em Go Language):
+
+<p align="left">
+  <img src="error.png" width="500" title="Resultados">
+</p>
+
+De acordo com nossas pesquisas, isso se dá pelo fato de que a linguagem não permitia a leitura/escrita da hashtable de forma simultânea. Desas forma, foi necessário implementar um Mutex de leitura e escrita, que pode encontrado no arquivo safe_hashtable.go.
+
+Em Python, o principal desafio foi lidar com as diferenças entre Threads e Processos e suas relações com funções Async. Como resultado, optamos por utilizar Processos (multiprocessing Process) e funções síncronas da biblioteca GRPC.
