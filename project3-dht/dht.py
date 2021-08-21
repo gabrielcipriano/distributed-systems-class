@@ -1,6 +1,6 @@
 import pika, sys, os, json
 from random import randrange
-from node import Node
+from node_dht import Node
 
 def main():
 
