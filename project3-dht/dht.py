@@ -1,27 +1,32 @@
 import pika, sys, os, json
 from random import randrange
-from node_dht import Node
+from node import Node
+from multiprocessing import Process
+
+processos = []
+
+def run_node():
+    node = Node()
+    node.join()
+
+def kill_nodes():
+    for p in processos:
+        p.terminate()
 
 def main():
-
-    # Entra no broker
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-    channel = connection.channel()
-
-    # Limpa a fila de mensagens
-    channel.queue_delete(queue='dht')
-
-    # Cria uma nova fila de mensagens
-    channel.queue_declare(queue='dht', durable=True)
-
-    # Inicializa os nós
-    # Falta colocar cada um em uma thread ou processo
-    nodes = [ Node() for _ in range(8) ] 
+    for _ in range(8):
+        p = Process(target=run_node)
+        p.start()
+        processos.append(p)
+    for p in processos:
+        p.join()
 
 if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
+        print('Interrupting...')
+        kill_nodes()
         print('Interrupted')
         try:
             sys.exit(0)
