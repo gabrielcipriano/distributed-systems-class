@@ -17,7 +17,21 @@ O arquivo `node.py` implementa a classe `Node`, que representa um nó da DHT. El
 
 O arquivo `user.py` implementa a classe `NodeUser`, que representa um cliente da DHT. Ele pode ser executado através do comando `python3 user.py` e o usuário será inicializado, enviará um valor aleatório para a DHT e solicitará o mesmo valor após 5 segundos, encerrando sua execução.
 
-As classes `Node` e `NodeUser` possuem o parâmetro `verbose` que é `True` por default. Quando ativo, vai printar na saida padrão todas as operações de get/put realizadas. Quando desativado, somente informações importantes e erros são printados.
+As classes `Node` e `NodeUser` possuem o parâmetro `verbose` que é `True` por default. Quando ativo, vai imprimir na saida padrão todas as operações de get/put realizadas. Quando desativado, somente informações importantes e erros são printados.
+
+#### Formato das mensagens
+O formato de mensagens escolhido foi JSON com uma estrutura inspirada em RPC:
+
+```
+JOIN  : {'type': 'join', 'node_id': 'node_id'}
+LEAVE : {'type': 'leave', 'node_id': 'node_id'}
+
+PUT   : {'type': 'put', 'key': 'key', 'value': 'value', 'node_id': 'node_id'}
+PUTOK : {'type': 'putok', 'key': 'key'}
+
+GET   : {'type': 'get', 'key': 'key', 'node_id': 'node_id'}
+GETOK : {'type': 'getok', 'key': 'key', 'value': 'value'}
+```
 
 ### Teste
 
