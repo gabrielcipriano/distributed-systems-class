@@ -13,7 +13,7 @@ from random import randrange
 # GETOK = {'type': 'getok', 'key': 'key', 'value': 'value'}
 
 class Node:
-    def __init__(self):
+    def __init__(self, verbose=True):
         self.id = randrange(0, 2**32)
         self.nodes = [self.id]
         self.prev = None
@@ -21,6 +21,7 @@ class Node:
         self.data = {}
         self.connection = None
         self.channel = None
+        self.verbose = verbose
 
     # Publish and subscribe to the queue
     def join(self):
@@ -87,7 +88,7 @@ class Node:
                 self.data[data['key']] = data['value']
                 r_data = { 'type': 'putok', 'key': data['key'] }
                 self.channel.basic_publish(exchange='dht', routing_key=str(data['node_id']), body=json.dumps(r_data))
-                print(f"Received put from {self.scn(data['key'])}")
+                if self.verbose: print(f"Received put from {self.scn(data['key'])}")
 
         # Se recebe um get
         elif (data['type'] == 'get' and data['key']):
@@ -101,13 +102,13 @@ class Node:
                 v = self.data[k] if k in self.data else None
                 r_data = { 'type': 'getok', 'key': k, 'value': v }
                 self.channel.basic_publish(exchange='dht', routing_key=str(data['node_id']), body=json.dumps(r_data))
-                print(f"Received get from {self.scn(data['key'])}")
+                if self.verbose: print(f"Received get from {self.scn(data['key'])}")
 
     # Processa um join
     def process_join(self,id,confirm=False):
         if (id == self.id): return
         
-        print(f"Received join from {self.scn(id)}")
+        print(f"Node {self.id}: Received join from {self.scn(id)}")
         if not confirm:
             data = { 'type': 'join', 'node_id': self.id, 'confirm': 1 }
             self.channel.basic_publish(exchange='config_individual', routing_key=str(id), body=json.dumps(data))

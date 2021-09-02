@@ -3,10 +3,12 @@ from random import randrange
 from node import Node
 from multiprocessing import Process
 
+verbose = False
+
 processos = []
 
 def run_node():
-    node = Node()
+    node = Node(verbose=verbose)
     node.join()
 
 def kill_nodes():

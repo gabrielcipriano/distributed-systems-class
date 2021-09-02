@@ -11,11 +11,12 @@ from time import sleep
 # GETOK = {'type': 'getok', 'key': 'key', 'value': 'value'}
 
 class NodeUser:
-    def __init__(self):
+    def __init__(self, verbose = True):
         self.id = randrange(0, 2**32)
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
         self.channel = self.connection.channel()
         self.retorno = None
+        self.verbose = verbose
 
         # Declara a Queue DHT e a Exchanges
         result = self.channel.queue_declare(queue='', exclusive=True, durable=True)
@@ -49,12 +50,12 @@ class NodeUser:
 
         # Se recebe um putok
         if (data['type'] == 'putok' and data['key']):
-            print(f"Key {data['key']} armazenada.")
+            if self.verbose: print(f"Key {data['key']} armazenada.")
             self.channel.stop_consuming()
 
         # Se recebe um getok
         elif (data['type'] == 'getok' and data['key'] and data['value']):
-            print(f"Key {data['key']} = {data['value']}")
+            if self.verbose: print(f"Key {data['key']} = {data['value']}")
             self.retorno = data['value']
             self.channel.stop_consuming()
 
