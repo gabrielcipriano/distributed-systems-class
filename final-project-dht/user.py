@@ -72,11 +72,10 @@ class NodeUser:
 if __name__ == '__main__':
     try:
         node = NodeUser()
-        # key = randrange(0, MAX_INT_ID)
-        key = 0
+        key = randrange(0, MAX_INT_ID)
         node.put(key, 'VALOR')
-        # sleep(5)
-        # node.get(key)
+        sleep(5)
+        node.get(key)
     except KeyboardInterrupt:
         print('Interrupted')
         try:
