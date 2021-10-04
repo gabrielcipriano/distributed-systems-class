@@ -10,23 +10,20 @@ n_operations = 1000 #each
 verbose = False
 
 MAX_INT_ID = 2**32
-# MAX_INT_ID = 1000
-
-
-sentKeys = []
 
 user_threads = []
 
 def run_user(user_id, users_success_tracker):
     user = NodeUser(verbose=verbose)
+    sentKeys = []
     success = True
     print(f"User {user_id} started.")
     
     for i in range(n_operations):
         key = randrange(0, MAX_INT_ID)
         value = str(key)
-        print(f"User {user_id} is trying to put {key} with value {value}.")
         user.put(key, value)
+        print(f"User {user_id} sent key {key} with value {value}.")
         sentKeys.append((key,value))
     
     input("Tecle enter para recuperar as chaves.")

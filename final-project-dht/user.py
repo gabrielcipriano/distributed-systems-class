@@ -5,14 +5,12 @@ from time import sleep
 # FORMATO DAS MENSAGENS:
 
 # PUT = {'type': 'put', 'key': 'key', 'value': 'value', 'node_id': 'node_id'}
-# PUTOK = {'type': 'putok', 'key': 'key'}
+# PUTOK = {'type': 'putok', 'key': 'key', 'node_id': 'node_id'}
 
 # GET = {'type': 'get', 'key': 'key', 'node_id': 'node_id'}
-# GETOK = {'type': 'getok', 'key': 'key', 'value': 'value'}
+# GETOK = {'type': 'getok', 'key': 'key', 'value': 'value', 'node_id': 'node_id'}
 
 MAX_INT_ID = 2**32
-# MAX_INT_ID = 1000
-
 
 class NodeUser:
     def __init__(self, verbose = True):
@@ -73,7 +71,7 @@ if __name__ == '__main__':
     try:
         node = NodeUser()
         key = randrange(0, MAX_INT_ID)
-        node.put(key, 'VALOR')
+        node.put(key, str(key))
         sleep(5)
         node.get(key)
     except KeyboardInterrupt:
